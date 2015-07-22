@@ -1,0 +1,32 @@
+/**
+ * 
+ *
+ * @module      :: UserAndSong
+ * @description :: The like history of User and Song. Only Member of the system can like a song and only one time
+ * @docs		:: https://github.com/balderdashy/sails-docs/blob/0.9/models.md
+ */
+
+module.exports = {
+
+	attributes: {
+
+        songId: {
+	      type : 'string',
+          required : true,
+          index : true
+	    },
+
+	    userId: {
+	      type : 'string',
+	      required : true,
+	      index :true
+	    },
+
+	    like : {
+	      type : 'boolean',
+	      index :true
+	    }
+
+    }
+
+};

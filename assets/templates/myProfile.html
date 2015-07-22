@@ -1,0 +1,95 @@
+<!-- Page content -->
+<div id="page-content" class="block" ng-controller="myProfileController" >
+    <!-- User Profile Header -->
+    <div class="block-header">
+        <div class="row remove-margin">
+            <!-- Photo and Name -->
+            <div class="col-sm-4">
+                <!-- If you do not want a link in the header, instead of .header-title-link you can use a div with the class .header-section -->
+                <a class="header-title-link" >
+                    <!--<img src="img/template/avatar2.jpg" alt="Avatar" class="profile-photo animation-expandUp img-circle">--> 
+                    <h1 class="profile-name">
+                        <i class="fa social-google_plus animation-expandUp" ng-show="User.memberAuthenType == 'google'"></i>
+                        <i class="fa social-facebook animation-expandUp" ng-show="User.memberAuthenType == 'facebook'"></i>
+                        <i class="fa social-twitter animation-expandUp" ng-show="User.memberAuthenType == 'twitter'"></i>
+                        <i class="fa social-yahoo animation-expandUp" ng-show="User.memberAuthenType == 'yahoo'"></i>
+                        <i class="fa social-dropbox animation-expandUp" ng-show="User.memberAuthenType == 'dropbox'"></i>
+                        {{User.name}} <br><small>My AliceBox</small>
+                    </h1>
+                </a>
+            </div>
+            <!-- END Photo and Name -->
+
+            <!-- Statistics -->
+            <div class="col-md-8">
+                <!-- Outer Grid -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!-- Inner Grid 1 -->
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <a href="#myAllSongs" class="header-link">
+                                    <h1 class="animation-pullDown">{{countSongs}}<br><small data-i18n="_Song_"></small></h1>
+                                </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="#myPlaylist" class="header-link">
+                                    <h1 class="animation-pullDown">{{countMyPlaylist}}<br><small data-i18n="_Playlist_"></small></h1>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- END Inner Grid 1 -->
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- Inner Grid 2 -->
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <a href="#myAlbum" class="header-link">
+                                    <h1 class="animation-pullDown">{{countAlbum}}<br><small data-i18n="_Album_"></small></h1>
+                                </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="#myArtist" class="header-link">
+                                    <h1 class="animation-pullDown">{{countMyArtist}}<br><small data-i18n="_Artist_"></small></h1>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- END Inner Grid 2 -->
+                    </div>
+                </div>
+                <!-- END Outer Grid  -->
+            </div>
+            <!-- END Statistics -->
+        </div>
+    </div>
+    <!-- END User Profile Header -->
+
+    <!-- User Profile Content -->
+    <!-- Actions Block -->
+    <div class="block">
+        <!-- Actions Title -->
+        <div class="block-title">
+            <h2>
+                <i class="fa social-dropbox"></i> My Dropbox 
+            </h2>
+        </div>
+        <!-- END Actions Title -->
+
+        <!-- Actions Content -->
+        <div class="row">
+            <div class="col-xs-4">
+                <b data-i18n="_Used_"></b>: {{normal | number:2 }}%<p></p>
+                <b data-i18n="_Remaining_"></b>: {{left | number:2 }}%<p></p>
+                <b data-i18n="_Total_Space_"></b>: {{dropBoxQuota | number:2 }}GB
+            </div>
+            <div class="col-xs4">
+                <canvas ng-show="User.dropBoxUserId > 0" tc-chartjs-doughnut chart-data="myData" chart-options="myOptions" width="150" height="150"></canvas>
+                <a href="/reLoginDropBox" ng-hide="User.dropBoxUserId > 0" class="btn btn-primary animation-pulse"><i class="fa social-dropbox"></i> Login To DropBox</a>
+            </div>
+        </div>
+        <!-- END Actions Content -->
+    </div>
+    <!-- END Actions Block -->
+    <!-- END User Profile Content -->
+</div>
+<!-- END Page Content -->

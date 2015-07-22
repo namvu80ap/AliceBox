@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html ng-app="aliceBoxApp">
+  <head>
+    <title>AliceBox - Music Application - Login Pages</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta charset="utf-8">
+	<meta name="description" content="Alicebox is a software help you listen music everywhere">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+	
+	<!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+   	<link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="img/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="img/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="img/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="img/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="img/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="img/icon152.png" sizes="152x152">
+    <!-- END Icons -->
+	
+    <!-- Stylesheets -->
+    <!-- The Open Sans font is included from Google Web Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,700,700italic">
+
+    <!-- Bootstrap is included in its original form, unaltered 
+    <link rel="stylesheet" href="css/bootstrap.css">
+    -->
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <!-- Related styles of various icon packs and javascript plugins -->
+    <link rel="stylesheet" href="css/plugins.css">
+
+    <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+
+    <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="{{themes}}" >
+    
+<!--    <link rel="stylesheet" href="css/themes/amethyst.css" ng-show="" >
+    <link rel="stylesheet" href="css/themes/dragon.css" ng-show=" themes=='dragon' " >
+    <link rel="stylesheet" href="css/themes/emerald.css" ng-show=" themes=='emerald' " >
+    <link rel="stylesheet" href="css/themes/grass.css" ng-show=" themes=='grass' " >
+    <link rel="stylesheet" href="css/themes/river.css" ng-show=" themes=='river' " >-->
+    
+    <link rel="stylesheet" href="css/angular-slider.css">
+    
+    <!-- END Stylesheets -->
+
+    <!-- Modernizr (Browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+    <script src="js/vendor/modernizr-2.6.2-respond-1.3.0.min.js"></script>
+    
+    
+    <style>
+        .thumbnail {
+          max-width: 200px; max-height: 150px; line-height: 20px; margin-bottom: 5px;
+        }
+      </style>
+  </head>
+    <!-- Body -->
+    <!-- In the PHP version you can set the following options from the config file -->
+    <!--
+        Add one of the following classes to the body element for the desirable feature:
+        'sidebar-left-pinned'                         for a left pinned sidebar (always visible > 1200px)
+        'sidebar-right-pinned'                        for a right pinned sidebar (always visible > 1200px)
+        'sidebar-left-pinned sidebar-right-pinned'    for both sidebars pinned (always visible > 1200px)
+    -->
+    <body class="header-fixed-top">
+        <!-- Left Sidebar -->
+        <!-- In the PHP version you can set the following options from the config file -->
+        <!-- If you add the class .enable-hover, then a small portion of left sidebar will be visible and it can be opened with a mouse hover (> 1200px) (may affect website performance) -->
+        <div id="sidebar-left" class="enable-hover">
+            <!-- Sidebar Content -->
+            <div class="sidebar-content">
+                <!-- Search Form -->
+<!--                <form action="page_ready_search_results.html" method="post" class="sidebar-search">
+                    <input type="text" id="sidebar-search-term" name="sidebar-search-term" placeholder="Search..">
+                </form>-->
+                <div class="sidebar-search">
+                    <div class="sidebar-section">
+                        <!--<h2 class="sidebar-header"><div data-i18n="_Change_Color_Themes_"></div></h2>-->
+<!--                         Change Color Theme functionality can be found in main.js - templateOptions() -->
+                        <ul class="theme-colors clearfix">
+                            <li ng-class="{active : userInfo.themeType == 'default'}" >
+                                <a href="#" class="themed-background-default themed-border-default" data-theme="default" data-toggle="tooltip" data-placement="bottom" title="Default" ng-click="mstUpdateTheme('default')" ></a>
+                            </li>
+                            <li ng-class="{active : userInfo.themeType == 'river'}">
+                                <a href="#" class="themed-background-river themed-border-river" data-theme="css/themes/river.css" data-toggle="tooltip" data-placement="bottom" title="River" ng-click="mstUpdateTheme('river')" ></a>
+                            </li>
+                            <li ng-class="{active : userInfo.themeType == 'amethyst'}" >
+                                <a href="#" class="themed-background-amethyst themed-border-amethyst" data-theme="css/themes/amethyst.css" data-toggle="tooltip" data-placement="bottom" title="Amethyst" ng-click="mstUpdateTheme('amethyst')" ></a>
+                            </li>
+                            <li ng-class="{active : userInfo.themeType == 'dragon'}" >
+                                <a href="#" class="themed-background-dragon themed-border-dragon" data-theme="css/themes/dragon.css" data-toggle="tooltip" data-placement="bottom" title="Dragon" ng-click="mstUpdateTheme('dragon')" ></a>
+                            </li>
+                            <li ng-class="{active : userInfo.themeType == 'emerald'}" >
+                                <a href="#" class="themed-background-emerald themed-border-emerald" data-theme="css/themes/emerald.css" data-toggle="tooltip" data-placement="bottom" title="Emerald" ng-click="mstUpdateTheme('emerald')" ></a>
+                            </li>
+<!--                            <li ng-class="{active : userInfo.themeType == 'grass'}">
+                                <a href="#" class="themed-background-grass themed-border-grass" data-theme="css/themes/grass.css" data-toggle="tooltip" title="Grass" ng-click="mstUpdateTheme('grass')" ></a>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+                <!-- END Search Form -->
+
+                <!-- Wrapper for scrolling functionality -->
+                <div class="sidebar-left-scroll">
+                    <!-- Sidebar Navigation -->
+                    <ul class="sidebar-nav">
+                        <li>
+                            <h2 class="sidebar-header"><div data-i18n="_Welcome_"></div></h2>
+                        </li>
+                        <li>
+                            <a href="#" ng-class="{ active : location == 'home' }" ng-click="goChangePage()" ><i class="fa fa-coffee"></i><b data-i18n="_Home_"></b></a>
+                        </li>
+                        <li >
+                            <h2 class="sidebar-header"><div data-i18n="_Upload_Songs_"></div></h2>
+                        </li>
+                        <% if(req.session.user.dropBoxUserId ) { %>
+                        <li>
+                            <a href="#upload" ng-class="{ active : location == 'upload' }" ng-click="goChangePage()"><i class="fa fa-dropbox"></i><b data-i18n="_To_My_Dropbox_"></b></a>
+                        </li>
+                        <% } else { %>
+                        <li ng-show="!$root.isIPhone" >
+                            <a href="/reLoginDropBox" ><i class="fa fa-external-link"></i><b data-i18n="_Login_To_Dropbox_"></b></a>
+                        </li>
+                        <% } %>
+                        <li>
+                            <h2 class="sidebar-header"><div data-i18n="_My_Music_"></div></h2>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-link"><i class="fa fa-headphones"></i><b data-i18n="_Listen_"></b></a>
+                            <ul>
+                                <li>
+                                    <a href="#myAllSongs" ng-class="{ active : location == 'myAllSongs' }" ng-click="goChangePage()" ><div data-i18n="_All_Songs_"></div></a>
+                                </li>
+                                <li>
+                                    <a href="#myPlaylist" ng-class="{ active : location == 'myPlaylist' }" ng-click="goChangePage()"><div data-i18n="_Playlist_"></div></a>
+                                </li>
+                                <li>
+                                    <a href="#myArtist" ng-class="{ active : location == 'myArtist' }" ng-click="goChangePage()"><div data-i18n="_Artist_"></div></a>
+                                </li>
+                                <li>
+                                    <a href="#myAlbum" ng-class="{ active : location == 'myAlbum' }" ng-click="goChangePage()"><div data-i18n="_Album_"></div></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h2 class="sidebar-header"><div data-i18n="_Personal_" ></div></h2>
+                        </li>
+                        <!-- <li>
+                            <a href="page_special_timeline.html"><i class="fa fa-clock-o"></i><b data-i18n="_Timeline_"></b></a>
+                        </li> -->
+                        <li>
+                            <a href="#myProfile" ng-class="{ active : location == 'myProfile' }" ng-click="goChangePage()" ><i class="fa fa-pencil-square"></i><b data-i18n="_User_Profile_"></b></a>
+                        </li>
+                        <!-- <li>
+                            <a href="page_special_message_center.html"><i class="fa fa-envelope-o"></i><b data-i18n="_Message_Center_"></b></a>
+                        </li> -->
+                        <li>
+                            <a href="/logout"><i class="fa fa-power-off"></i><b data-i18n="_Logout_"></b></a>
+                        </li>
+                    </ul>
+                    <!-- END Sidebar Navigation -->
+                    <!-- Color Themes -->
+                    
+                </div>
+                <!-- END Wrapper for scrolling functionality -->
+            </div>
+            <!-- END Sidebar Content -->
+        </div>
+        <!-- END Left Sidebar -->
+
+        <!-- Right Sidebar -->
+        <!-- In the PHP version you can set the following options from the config file -->
+        <!-- If you add the class .enable-hover, then a small portion of right sidebar will be visible and it can be opened with a mouse hover (> 1200px) (may affect website performance) -->
+        <div id="sidebar-right">
+            <!-- Sidebar Content -->
+            <div class="sidebar-content">
+                <!-- User Info -->
+                <div class="user-info">
+                    <div class="user-details">
+                        <div data-i18n="_Language_"></div>
+                        <img src="img/flag/United-States.png" alt="Us" ng-click="setLanguage('en-US')">
+<!--                    <img src="img/flag/France.png" alt="vn" ng-click="setLanguage('vi-VN')">
+                        <img src="img/flag/Germany.png" alt="vn" ng-click="setLanguage('vi-VN')">
+                        <img src="img/flag/South-Korea.png" alt="vn" ng-click="setLanguage('vi-VN')">-->
+                        <img src="img/flag/Vietnam.png" alt="vn" ng-click="setLanguage('vi-VN')">
+                        <img src="img/flag/Japan.png" alt="jp" ng-click="setLanguage('ja-JP')" >
+                    </div>
+                    <i class="fa fa-flag fa-2x"></i>
+                </div>
+                <!-- END User Info -->
+
+                <!-- Wrapper for scrolling functionality -->
+                <div class="sidebar-right-scroll" >
+<!--                     Color Themes 
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-header">Color Themes</h2>
+                         Change Color Theme functionality can be found in main.js - templateOptions() 
+                        <ul class="theme-colors clearfix">
+                            <li ng-class="{active : userInfo.themeType == 'default'}" >
+                                <a href="#" class="themed-background-default themed-border-default" data-theme="default" data-toggle="tooltip" title="Default" ng-click="mstUpdateTheme('default')" ></a>
+                            </li>
+                            <li ng-class="{active : userInfo.themeType == 'river'}">
+                                <a href="#" class="themed-background-river themed-border-river" data-theme="css/themes/river.css" data-toggle="tooltip" title="River" ng-click="mstUpdateTheme('river')" ></a>
+                            </li>
+                            <li ng-class="{active : userInfo.themeType == 'amethyst'}" >
+                                <a href="#" class="themed-background-amethyst themed-border-amethyst" data-theme="css/themes/amethyst.css" data-toggle="tooltip" title="Amethyst" ng-click="mstUpdateTheme('amethyst')" ></a>
+                            </li>
+                            <li ng-class="{active : userInfo.themeType == 'dragon'}" >
+                                <a href="#" class="themed-background-dragon themed-border-dragon" data-theme="css/themes/dragon.css" data-toggle="tooltip" title="Dragon" ng-click="mstUpdateTheme('dragon')" ></a>
+                            </li>
+                            <li ng-class="{active : userInfo.themeType == 'emerald'}" >
+                                <a href="#" class="themed-background-emerald themed-border-emerald" data-theme="css/themes/emerald.css" data-toggle="tooltip" title="Emerald" ng-click="mstUpdateTheme('emerald')" ></a>
+                            </li>
+                            <li ng-class="{active : userInfo.themeType == 'grass'}">
+                                <a href="#" class="themed-background-grass themed-border-grass" data-theme="css/themes/grass.css" data-toggle="tooltip" title="Grass" ng-click="mstUpdateTheme('grass')" ></a>
+                            </li>
+                        </ul>
+                    </div>-->
+                    <!-- END Color Themes -->
+
+                    <!-- User Menu
+                    <ul class="sidebar-nav">
+                        <li>
+                            <h2 class="sidebar-header">Explore</h2>
+                        </li>
+                        <li>
+                            <a href="page_special_timeline.html"><i class="fa fa-clock-o"></i> Updates</a>
+                        </li>
+                        <li>
+                            <a href="page_special_user_profile.html"><i class="fa fa-pencil-square"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="page_special_message_center.html"><i class="fa fa-envelope-o"></i> Messages</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fa fa-cog"></i> Settings</a>
+                        </li>
+                        <li>
+                            <a href="page_special_login.html"><i class="fa fa-power-off"></i> Logout</a>
+                        </li>
+                    </ul>
+                    END User Menu -->
+                    <!-- Messages -->
+                    <div class="sidebar-section" ng-show="showWelcome">
+                        <h2 class="sidebar-header"><div data-i18n="_Welcome_"></div></h2>
+
+                        <div class="alert alert-success alert-dismissable" >
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <small><em>{{userInfo.name}}</em></small><br>
+                            <!-- <small><a href="page_special_user_profile.html">Claire</a>, {{msg.content.en}}</small><br>
+                            {{msg.content.en}} <a href="page_special_message_center.html">more</a> -->
+                            Welcome to Alicebox, I hope you will enjoin your music with our service everywhere on any devices !!
+                        </div>
+
+                    </div>
+
+                    <!-- Messages -->
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-header"><div data-i18n="_Messages_"></div></h2>
+
+                        <div class="alert alert-info alert-dismissable" ng-repeat="msg in sysemMessage" ng-switch="userInfo.myLocale">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <!-- <small><em>{{userInfo.name}}</em></small><br>{{userInfo.myLocale}}
+                            <small><a href="page_special_user_profile.html">Claire</a>, {{msg.content.en}}</small><br> -->
+                            <div ng-switch-when="en-US">{{msg.content.en}}</div>
+                            <div ng-switch-when="ja-JP">{{msg.content.jp}}</div>
+                            <div ng-switch-when="vi-VN">{{msg.content.vn}}</div>
+                            <div ng-switch-default >{{msg.content.en}}</div>
+                            <!-- <a href="page_special_message_center.html">more</a> -->
+                        </div>
+
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-header"><div data-i18n="_Notifications_"></div></h2>
+                        <!-- <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <small><em>2 hours ago</em></small><br>
+                            PHP version updated successfully on <a href="javascript:void(0)">Server #5</a>
+                        </div> -->
+                        <div class="alert alert-warning alert-dismissable" ng-repeat="msg in notifyMessage" ng-switch="userInfo.myLocale">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <small ng-if="msg.title && msg.title!=''" >
+                                <a ng-click="openAdwindown( msg.link )" ng-if="msg.link && msg.link != ''" ><em>{{msg.title}}</em></a>
+                                <em ng-if="!msg.link || msg.link==''">{{msg.title}}</em>
+                            </small>
+                            <br ng-if="msg.title && msg.title!=''">
+                            <div ng-switch-when="en-US" ng-bind-html="msg.content.en" ></div>
+                            <div ng-switch-when="ja-JP" ng-bind-html="msg.content.jp"></div>
+                            <div ng-switch-when="vi-VN" ng-bind-html="msg.content.vn"></div>
+                            <div ng-switch-default ng-bind-html="msg.content.en"></div>
+                        </div>
+                    </div>
+                    <!-- END Notifications -->
+                    
+                    <!-- Advertisment -->
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-header"><div data-i18n="_For_advertisement_"></div></h2>
+                        <!-- <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <small><em>2 hours ago</em></small><br>
+                            For advertisement <a href="javascript:void(0)">Server #5</a>
+                        </div>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <small><em>3 hours ago</em></small><br>
+                            <a href="javascript:void(0)">AliceBox</a> Music Application
+                        </div> -->
+                        <div class="alert alert-success alert-dismissable" ng-repeat="msg in advertiseMsg" >
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <small><em>{{msg.title}}</em></small><br>
+                            <a ng-click="openAdwindown( 'http://google.com' )">{{msg.content.en}}</a>
+                        </div>
+                    </div>
+                    <!-- END Notifications -->
+                    
+                    <!-- END Messages -->
+                </div>
+                <!-- END Wrapper for scrolling functionality -->
+            </div>
+            <!-- END Sidebar Content -->
+        </div>
+        <!-- END Right Sidebar -->
+
+        <!-- Page Container -->
+        <!-- In the PHP version you can set the following options from the config file -->
+        <!-- Add the class .full-width for a full width page (100%, 1920px max width) -->
+        <div id="page-container">
+            <!-- Header -->
+            <!-- In the PHP version you can set the following options from the config file -->
+            <!-- Add the class .navbar-default or .navbar-inverse for a light or dark header respectively -->
+            <!-- Add the class .navbar-fixed-top or .navbar-fixed-bottom for a fixed header on top or bottom respectively -->
+            <!-- If you add the class .navbar-fixed-top remember to add the class .header-fixed-top to <body> element -->
+            <!-- If you add the class .navbar-fixed-bottom remember to add the class .header-fixed-bottom to <body> element -->
+            <header class="navbar navbar-default navbar-fixed-top">
+                <!-- Right Header Navigation -->
+                <ul class="nav header-nav pull-right">
+<!--                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-cogs"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-custom pull-right">
+                            <li class="dropdown-header text-center">HEADER</li>
+                            <li>
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-header-default">Default</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-header-inverse">Inverse</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-header-top">Top</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-header-bottom">Bottom</a>
+                                </div>
+                            </li>
+                            <li class="hidden-xs hidden-sm dropdown-header text-center">FULL WIDTH PAGE</li>
+                            <li class="hidden-xs hidden-sm">
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-fw-disable">Disable</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-fw-enable">Enable</a>
+                                </div>
+                            </li>
+                            <li class="visible-lg dropdown-header text-center">PIN SIDEBARS</li>
+                            <li class="visible-lg">
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-pin-left">Pin Left</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-pin-right">Pin Right</a>
+                                </div>
+                            </li>
+                            <li class="visible-lg dropdown-header text-center">SIDEBARS MOUSE HOVER</li>
+                            <li class="visible-lg">
+                                <div class="btn-group btn-group-justified btn-group-sm">
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-hover-left">Left</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" id="options-hover-right">Right</a>
+                                </div>
+                            </li>
+                            <li class="visible-lg hidden-lt-ie9 dropdown-header text-center">EFFECT WHEN SIDEBARS OPEN</li>
+                            <li class="visible-lg hidden-lt-ie9 text-center">
+                                <div class="btn-group-vertical btn-group-sm" id="option-effects">
+                                    <button class="btn btn-default" data-fx="fx-none">None</button>
+                                    <button class="btn btn-default" data-fx="fx-opacity">Opacity</button>
+                                    <button class="btn btn-default" data-fx="fx-move">Move</button>
+                                    <button class="btn btn-default" data-fx="fx-push">Push</button>
+                                    <button class="btn btn-default" data-fx="fx-rotate">Rotate</button>
+                                    <button class="btn btn-default" data-fx="fx-push-move">Push and Move</button>
+                                    <button class="btn btn-default" data-fx="fx-push-rotate">Push and Rotate</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>-->
+                    <li>
+                        <a ng-click="openFriendMessagePopup()">
+                            <span class="badge">
+                                <b ng-if="userInfo.newMsgCnt > 0">{{userInfo.newMsgCnt}}&nbsp;</b><i class="fa fa-comments-o"></i>&nbsp;
+                                <b ng-if="userInfo.newFriendReq > 0">&nbsp;{{userInfo.newFriendReq}}&nbsp;</b><i class="fa fa-user"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li ng-click="updateReadMessageTime()">
+                        <a id="sidebar-right-toggle">
+                            <strong ng-show="unreadCnt > 0">{{unreadCnt}}</strong> <i class="fa fa-envelope"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- END Right Header Navigation -->
+
+                <!-- Left Header Navigation -->
+                <ul class="nav header-nav pull-left">
+                    <li>
+                        <a id="sidebar-left-toggle">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- END Left Header Navigation -->
+
+                <!-- Header Brand -->
+                <a class="navbar-brand glyphicon-music">
+                    <span>AliceBox</span>
+                </a>
+                <!-- END Header Brand -->
+            </header>
+            <!-- END Header -->
+
+            <!-- FX Container -->
+            <!-- In the PHP version you can set the following options from the config file -->
+            <!--
+                All effects apply in resolutions larger than 1200px width
+                Add one of the following classes to #fx-container for setting an effect to main content when one of the sidebars are opened
+                'fx-none'           remove all effects (better website performance)
+                'fx-opacity'        opacity effect
+                'fx-move'           move effect
+                'fx-push'           push effect
+                'fx-rotate'         rotate effect
+                'fx-push-move'      push-move effect
+                'fx-push-rotate'    push-rotate effect
+            -->
+            <div id="fx-container" class="fx-opacity">
+                <!-- Angular View Content -->
+                <div ng-view></div>
+
+                <!-- Remember to include excanvas for IE8 chart support -->
+                <!--[if IE 8]><script src="js/helpers/excanvas.min.js"></script><![endif]-->
+
+                <!-- Footer -->
+                <footer class="clearfix">
+                    <div class="pull-right">
+                        Created with <i class="fa fa-heart"></i> by <a target="_blank">NamVu</a>
+                    </div>
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a target="_blank">AliceBox</a>
+                    </div>
+                </footer>
+                <!-- END Footer -->
+            </div>
+            <!-- END FX Container -->
+        </div>
+        <!-- END Page Container -->
+
+        <!-- POPUP FOR User Massage Modal -->
+        <div id="modalUserMessageController" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body" >
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <ul class="nav nav-tabs" data-toggle="tabs">
+                            <li class="active"><a href="#modal-tabs-profile"><i class="glyphicon-group"></i>&nbsp;Connection</a></li>
+                            <!-- <li><a href="#modal-tabs-settings" data-toggle="tooltip" title="Settings"><i class="fa fa-cogs"></i></a></li> -->
+                        </ul>
+                        <!-- TAB FRIENDS START -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="modal-tabs-profile" style="height:300px;overflow:auto;">
+                                <!-- WAITTING FRIENDS LIST -->
+                                <div class="sub-header" ng-if="userInfo.newFriendReq > 0 " >Waitting Request &nbsp;<span class="badge alert-info" ng-if="userInfo.newFriendReq > 0 ">{{userInfo.newFriendReq}}</span></div>
+                                <table class="table table-responsive table-hover table-striped" ng-if="userInfo.newFriendReq > 0 ">
+                                    <tbody >
+                                        <tr ng-repeat="friend in userInfo.friendListData | filter : { accepted : 'W' }" >
+                                            <td class="col-sm-12">
+                                                <div class="row" ng-click="isCollapse = !isCollapse; getFriendMsgList(friend , isCollapse)">
+                                                    &nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i>
+                                                    &nbsp;<b ng-class="{'animation-pulse': userInfo.onlineFriendIds.indexOf( friend.friendInfo.friendId ) >= 0, 'text-info':userInfo.onlineFriendIds.indexOf( friend.friendInfo.friendId ) >= 0}">{{friend.friendInfo.name}}<b> 
+                                                    <span class="badge alert-success pull-right" ng-if="userInfo.newFriendReq > 0 && friend.accepted == 'W'" ng-click="acceptRequest( friend , $index )">Accept</span>&nbsp;&nbsp;
+                                                </div>
+                                                <br>
+                                                <!-- CHAT MESSAGE LIST -->
+                                                <!-- <div class="block" collapse="!isCollapse" style="height:200px;overflow:auto;" > -->
+                                                    <!-- CHAT MESSAGEs-->
+                                                    <!-- <div class="timeline-item breadcrumb" ng-repeat="friendMsg in friend.friendMsgList">
+                                                        <h8 class="timeline-title text-muted"><i class="fa fa-user"></i> <a>aaa</a><small class="timeline-meta pull-right">2 hour</small></h8>
+                                                        <div class="timeline-content text-muted">{{friendMsg.content}}</div>
+                                                    </div> -->
+                                                    <!-- INPUT MESSAGE -->
+                                                    <!-- <div class="timeline-item breadcrumb">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <div class="btn btn-info input-group-addon" ng-click="sendFriendMessage( friend )" ><i ng-if="!friend.addingMsg" class="fa fa-edit"></i><i ng-if="friend.addingMsg" class="fa fa-spinner fa-spin"></i></div>
+                                                                <textarea ng-strim="true" ng-maxlength="3000" class="form-control" placeholder="write your comment" ng-model="friend.newContent" ></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                <div>
+                                                <!-- END MESSAGE LIST -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- END WAITTING FRIENDS LIST -->
+                                <!-- ACCEPTED FRIENDS LIST -->
+                                <div class="sub-header" >Friends</div>
+                                <table class="table table-responsive table-hover table-striped">
+                                    <tbody >
+                                        <tr ng-repeat="friend in userInfo.friendListData | filter : { accepted : 'A' }">
+                                            <td class="col-sm-12">
+                                                <div class="row" ng-click="isCollapse = !isCollapse ; getFriendMsgList(friend , isCollapse)">
+                                                    &nbsp;&nbsp;&nbsp;<i class="fa fa-user"></i>&nbsp;
+                                                    <b ng-class="{'animation-pulse': userInfo.onlineFriendIds.indexOf( friend.friendInfo.friendId ) >= 0, 'text-info':userInfo.onlineFriendIds.indexOf( friend.friendInfo.friendId ) >= 0}" >{{friend.friendInfo.name}}</b>
+                                                    <span class="badge alert-info pull-right" ><small am-time-ago="friend.updatedAt"></small></span>
+                                                    <span class="badge pull-right" ng-if="friend.newMsgCnt.userId==userInfo.id"><i class="fa fa-comments"></i>{{friend.newMsgCnt.cnt}}</span>&nbsp;&nbsp;
+                                                </div>
+                                                <br>
+                                                <!-- CHAT MESSAGE LIST -->
+                                                <div class="block" collapse="!isCollapse" style="height:200px;overflow:auto;" >
+                                                    <!-- Load more button.. -->
+                                                    <div class="timeline-item text-center" >
+                                                        <div ng-if="!friend.loadingMoreMsg" class="btn btn-info btn-sm" ng-click="loadMoreFriendMsgList( friend )" ><i class="fa fa-arrow-down" ></i> Load more...</div>
+                                                        <i ng-if="friend.loadingMoreMsg" class="fa fa-spinner fa-spin"></i>
+                                                    </div>
+                                                    <br>
+                                                    <!-- CHAT MESSAGEs-->
+                                                    <div class="timeline-item" ng-repeat="friendMsg in friend.friendMsgList">
+                                                        <h8 class="timeline-title text-muted">
+                                                            <i class="fa fa-user"></i> <a ng-if="friendMsg.sentBy != userInfo.id">{{friend.friendInfo.name}}</a>
+                                                            <a ng-if="friendMsg.sentBy == userInfo.id">Me</a>
+                                                            <small class="timeline-meta pull-right"><span am-time-ago="friendMsg.createdAt"></span></small>
+                                                        </h8>
+                                                        <div class="timeline-content text-muted"><pre class="breadcrumb"><small>{{friendMsg.content}}</small></pre></div>
+                                                    </div>
+                                                    <!-- INPUT MESSAGE -->
+                                                    <div class="timeline-item breadcrumb">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <div class="btn btn-info input-group-addon" ng-click="sendFriendMessage( friend )" >
+                                                                    <i ng-if="!friend.addingMsg" class="fa fa-edit"></i><i ng-if="friend.addingMsg" class="fa fa-spinner fa-spin"></i>
+                                                                </div>
+                                                                <textarea required ng-strim="true" ng-maxlength="3000" name="newContent" class="form-control" placeholder="write your message" ng-model="friend.newContent" ></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <div>
+                                                <!-- END MESSAGE LIST -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- ACCEPTED FRIENDS LIST END -->
+                            </div>
+                        </div>
+                        <!-- END TAB CONTENT -->
+                    </div>
+                   <!--  <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="testSave()">Save changes</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- END User Massage Modal -->
+
+        <!-- Bring in the socket.io client --> 
+        <script type="text/javascript" src="/js/socket.io.js"></script>
+        <!-- then beef it up with some convenience logic for talking to Sails.js -->
+        <script type="text/javascript" src="/js/sails.io.js"></script>
+        <!-- listen on socket.io for incoming messages -->
+        <!-- // <script type="text/javascript" src="/js/app.js"></script> -->
+        
+         <!-- Scroll to top link, check main.js - scrollToTop() -->
+        <a href="javascript:void(0)" id="to-top"><i class="fa fa-angle-up"></i></a>
+        
+        <!-- Your scripts here? -->        
+        <!-- Get Jquery library from Google but if something goes wrong get Jquery from local file - Remove 'http:' if you have SSL -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>!window.jQuery && document.write(unescape('%3Cscript src="js/vendor/jquery-1.10.2.min.js"%3E%3C/script%3E'));</script>
+        
+        <!-- Bootstrap.js, Jquery plugins and custom Javascript code -->
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/lib/bootbox.min.js"></script>
+        
+        <!-- Angular Resource -->
+        <script src="js/lib/angular/Chart.js"></script>
+        <script src="js/lib/angular/angular.js"></script>
+        <script src="js/lib/angular/angular-route.js"></script>
+        <script src="js/lib/angular/angular-slider.js"></script>
+        <script src="js/lib/angular/angular-resource.js"></script>
+        <script src="js/lib/angular/angular-touch.js"></script>
+        <script src="js/lib/angular/angular-sanitize.js"></script>
+        <script src="js/lib/angular/es5-shim.js"></script>
+        <script src="js/lib/angular/angular-file-upload.js"></script>
+        <script src="js/lib/angular/ui-bootstrap-tpls-0.10.0.js"></script>
+        <script src="js/lib/angular/localize/localize.js"></script>
+        <script src="js/lib/angular/tc-angular-chartjs.js"></script>
+        <script src="js/lib/angular/moment.js"></script>
+        <script src="js/lib/angular/angular-moment.min.js"></script>
+
+        <!-- APP -->
+        <script src="js/aliceBoxApp.js"></script>
+
+        <script src="js/controllers.js"></script>
+        <!-- // <script src="js/controllers.min.js"></script> -->
+
+        <script src="js/flowUploadController.js"></script>
+        <!-- // <script src="js/flowUploadController.min.js"></script> -->
+        
+        <script src="js/myAllSongsController.js"></script>
+        <!-- // <script src="js/myAllSongsController.min.js"></script> -->
+        
+        <script src="js/myPlaylistController.js"></script>
+        <!-- // <script src="js/myPlaylistController.min.js"></script> -->
+        
+        <script src="js/myAlbumController.js"></script>
+        <!-- // <script src="js/myAlbumController.min.js"></script> -->
+        
+        <script src="js/myArtistController.js"></script>
+        <!-- // <script src="js/myArtistController.min.js"></script> -->
+        
+        <script src="js/myProfileController.js"></script>
+        <!-- // <script src="js/myProfileController.min.js"></script> -->
+        
+        <script src="js/angular-adaptive-detection.js"></script>
+    </body>
+</html>

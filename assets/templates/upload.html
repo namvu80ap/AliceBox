@@ -1,0 +1,145 @@
+<!-- PAGE CONTENT -->
+<div id="page-content" class="block" ng-controller="flowUploadController">
+    <!-- Blank Header -->
+    <div class="block-header">
+        <!-- If you do not want a link in the header, instead of .header-title-link you can use a div with the class .header-section -->
+        <a href="" class="header-title-link">
+            <h1>
+                <i class="fa fa-cloud-upload animation-expandUp"></i><m data-i18n="_Upload_Songs_"></m><br><small data-i18n="_Save_your_songs_to_your_Dropbox._"></small>
+            </h1>
+        </a>
+    </div>
+<!--    <ul class="breadcrumb breadcrumb-top">
+        <li><i class="fa fa-file-o"></i></li>
+        <li>Home</li>
+        <li><a href="">Upload Songs</a></li>
+    </ul>-->
+    <!-- END Blank Header -->                      
+    <!-- Blank Content -->
+    <!-- START UPLOAD FORM -->
+    <div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label" for="example-text-input"><b data-i18n="_Select_your_songs_"></b></label>
+                <div>
+                    <input ng-file-select type="file" class="btn-default"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="example-multiple-select"><b data-i18n="_Playlist_"></b> :</label>
+                <div>
+                    <select ng-model="playlistId" class="form-control" size="3" ng-options="p.id as p.name for p in playlists" multiple >
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="example-select"><b data-i18n="_Share_to_"></b>:</label>
+                <div>
+                    <select ng-change="changePermission()" class="form-control" size="1" ng-model="defaultPer" ng-options="c.name as c.value for c in permissions">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="example-select"><b data-i18n="_List_Songs_"></b>:</label>
+                <div>
+                    <div class="block full">
+                        <div class="block-title">
+                            <div class="block-options pull-right"><b data-i18n="_Total_"></b> : {{ uploader.queue.length }}</div>
+                            <h2><i class="fa fa-tasks"></i> <b data-i18n="_Files_"></b></h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><div data-i18n="_File_Name_"></div></th>
+                                        <th ng-show="uploader.isHTML5"><div data-i18n="_Size_"></div></th>
+                                        <th ng-show="uploader.isHTML5"><div data-i18n="_Progress_"></div></th>
+                                        <th><div data-i18n="_Status_"></div></th>
+                                        <th><div data-i18n="_Actions_"></div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in uploader.queue">
+                                        <td><strong>{{ item.file.name }}</strong></td>
+                                        <td ng-show="uploader.isHTML5">{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                        <td ng-show="uploader.isHTML5">
+                                            <div class="progress progress-striped">
+                                                <div class="progress-bar progress-bar-success" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <i ng-show="item.isSuccess" class="glyphicon-ok"></i>
+                                            <i ng-show="item.isCancel" class="glyphicon-ban"></i>
+                                            <i ng-show="item.isError" class="glyphicon-remove"></i>
+                                            <i ng-show="item.formData[0].shareTo=='world'" class="glyphicon-globe"></i>
+                                            <i ng-show="item.formData[0].shareTo=='friend'" class="glyphicon-group"></i>
+                                            <i ng-show="item.formData[0].shareTo=='me'" class="glyphicon-lock"></i>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                <span class="glyphicon-remove"></span> <m data-i18n="_Remove_"></m>
+                                            </button>
+                                        </td>
+                <!--                        <td>
+                                            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                <span class="glyphicon-upload"></span> Upload
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                                <span class="glyphicon-ban"></span> Cancel
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                <span class="glyphicon-remove"></span> Remove
+                                            </button>
+                                        </td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="divider">
+                            <div >
+                                <p>
+                                    <m data-i18n="_Upload_Process_"></m>:
+                                    <div class="progress progress-striped active" style="">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <!-- END UPLOAD FROM -->
+    <div>
+        <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+            <span class="glyphicon-upload"></span> <b data-i18n="_Upload_"></b> 
+        </button>
+        <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+            <span class="glyphicon-ban"></span> <b data-i18n="_Cancel_"></b>
+        </button>
+        <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+            <span class="glyphicon-remove"></span> <b data-i18n="_Remove_"></b>
+        </button>
+    </div>
+    
+    <p></p>
+    <!-- LOADING MODAL -->
+    <div id="loading_modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+       <div class="modal-dialog modal-sm">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                   <h4 class="modal-title"><b data-i18n="_LOADING_"></b>.....</h4>
+               </div>
+               <div class="modal-body text-center">
+                   <div class="fa fa-gear fa-spin fa-4x"></div>
+               </div>
+           </div>
+       </div>
+    </div>
+    <!-- END LOADING MODAL -->
+</div>
+<!-- END PAGE  -->
